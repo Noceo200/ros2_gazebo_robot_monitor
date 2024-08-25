@@ -4,7 +4,7 @@ from datetime import datetime
 
 def generate_launch_description():
     # Construct the directory path with the current date and time
-    directory = "/home/rexilius/workspace/ros_workspace/data_results/"
+    directory = "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/"
     date_code = datetime.now().strftime("%Y-%m-%d__%H-%M-%S")
     directory = directory + date_code + "/"
 
