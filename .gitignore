@@ -5,3 +5,4 @@
 **/.vscode/
 **/exports_set_up/
 **/exports_packages/
+__pycache__
