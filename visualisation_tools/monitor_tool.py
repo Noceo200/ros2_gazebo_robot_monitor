@@ -101,7 +101,7 @@ def sav_indicators(file,vals_list,vals_names_list):
 if __name__ == "__main__":
     
     #directory = "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/2024-08-25__22-58-42/"
-    directory = "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/2024-08-25__23-37-43/"
+    directory = "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/test_merged_scan_costmaps_40Hz_40Hz/"
 
     dir_save_outputs = directory+"VISUALS/"
     # Check if the directory exists
