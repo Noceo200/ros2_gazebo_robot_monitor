@@ -1,6 +1,0 @@
-INDICATORS:
-Amount of values: 180
-Load average: 18.976111111111116
-Standard deviation: 0.11707731960303917
-Min Load: 18.8
-Max Load: 19.3
