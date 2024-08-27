@@ -103,14 +103,14 @@ def sav_indicators(file,vals_list,vals_names_list):
 if __name__ == "__main__":
     
     directories = [
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/40000_points_per_cameras/all_inputs-2024-08-26_23.34.38/",
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/40000_points_per_cameras/merged_scan-2024-08-27_00.43.23/",
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/90000_points_per_cameras/all_inputs-2024-08-26_23.41.45/",
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/90000_points_per_cameras/merged_scan-2024-08-27_00.40.51/",
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/160000_points_per_cameras/all_inputs-2024-08-26_23.45.45/",
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/160000_points_per_cameras/merged_scan-2024-08-27_00.34.20/",
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/202500_points_per_cameras/all_inputs-2024-08-26_23.49.40/",
-        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/202500_points_per_cameras/merged_scan-2024-08-27_00.37.30/"
+        "data_results/40000_points_per_cameras/all_inputs-2024-08-26_23.34.38/",
+        "data_results/40000_points_per_cameras/merged_scan-2024-08-27_00.43.23/",
+        "data_results/90000_points_per_cameras/all_inputs-2024-08-26_23.41.45/",
+        "data_results/90000_points_per_cameras/merged_scan-2024-08-27_00.40.51/",
+        "data_results/160000_points_per_cameras/all_inputs-2024-08-26_23.45.45/",
+        "data_results/160000_points_per_cameras/merged_scan-2024-08-27_00.34.20/",
+        "data_results/202500_points_per_cameras/all_inputs-2024-08-26_23.49.40/",
+        "data_results/202500_points_per_cameras/merged_scan-2024-08-27_00.37.30/"
     ]
 
     start_times = [
