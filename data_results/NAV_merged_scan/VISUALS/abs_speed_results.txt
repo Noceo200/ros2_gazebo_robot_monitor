@@ -1,0 +1,6 @@
+INDICATORS:
+Amount of values: 327
+Speed average: 0.2826759759281762
+Standard deviation: 0.16721669186304508
+Min Speed: 0.0006976285717520692
+Max Speed: 0.40126372112300684

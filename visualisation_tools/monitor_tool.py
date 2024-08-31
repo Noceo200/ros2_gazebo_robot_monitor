@@ -100,6 +100,43 @@ def sav_indicators(file,vals_list,vals_names_list):
         with open(file, 'w') as file:
             file.write(msg)
 
+def custom_func(file_path, title, x_label, y_label, x_val_index, y_val_index, output_graph_path=None, show_plot=True, crop_start=0.0, crop_end=9999999.0, window_size=10):
+    # Read the data from the file
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    # Parse the data
+    x_values = []
+    y_values = []
+    for line in lines:
+        if line.strip():  # Ignore empty lines
+            val_list = line.strip().split(';')
+            if float(val_list[0]) > crop_start and float(val_list[0]) < crop_end:
+                x_values.append(float(val_list[x_val_index]))
+                y_values.append(float(val_list[y_val_index]))
+
+    # Calculate the moving average
+    def moving_average(data, window_size):
+        return np.convolve(data, np.ones(window_size)/window_size, mode='valid')
+
+    y_values_smoothed = moving_average(y_values, window_size)
+    x_values_smoothed = x_values[:len(y_values_smoothed)]
+
+    # Plot the data
+    if show_plot or output_graph_path is not None:
+        plt.figure()
+        plt.plot(x_values, y_values, label='Original Data')
+        plt.plot(x_values_smoothed, y_values_smoothed, label='Moving Average', color='red')
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+        plt.title(title)
+        plt.legend()
+        if show_plot:
+            plt.show()
+        if output_graph_path is not None:
+            plt.savefig(output_graph_path)
+            print(output_graph_path + " saved...")
+
 if __name__ == "__main__":
     
     directories = [
@@ -135,6 +172,21 @@ if __name__ == "__main__":
         26.76
     ]
 
+    directories = [
+        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/NAV_raw_inputs/",
+        "/home/rexilius/workspace/CALL-M_core/robot_ws_ros2/src/included_external_packages/ros2_gazebo_robot_monitor/data_results/NAV_merged_scan/"
+    ]
+
+    start_times = [
+        30.0,
+        30.0
+    ]
+
+    durations = [
+        40.0,
+        40.0
+    ]
+
     for i in range(len(directories)):
 
         directory = directories[i]
@@ -164,3 +216,12 @@ if __name__ == "__main__":
         #robot's speed data
         speeds_file_path = directory+"robot_stats/speeds.txt"
         save_robot_abs_linear_speed(speeds_file_path,output_indicators_path=dir_save_outputs+"abs_speed_results.txt",output_graph_path=dir_save_outputs+"abs_speed_results_graph.png",show_plot=False,crop_start=start_time,crop_end=end_time)
+
+        #CUSTOM CPU Load plotting
+        process_name = "planner_server"
+        custom_cpu_load_file_path = directory+"computer_stats/cpu_load_"+process_name +".txt"
+        save_cpu_load(custom_cpu_load_file_path,output_indicators_path=dir_save_outputs+"cpu_load_results_"+process_name +".txt",output_graph_path=dir_save_outputs+"cpu_load_results_graph_"+process_name +".png",show_plot=False,crop_start=start_time,crop_end=end_time)
+
+        custom_func(cpu_load_file_path, "Overall CPU load mean", "time (s)", "Load (%)", 0, 1, output_graph_path=dir_save_outputs+"cpu_load_results_graph_moving_avg.png", show_plot=False,crop_start=start_times[i],crop_end=start_times[i]+durations[i])
+        custom_func(custom_cpu_load_file_path, "Navigation planner cpu load mean", "time (s)", "Load (%)", 0, 1, output_graph_path=dir_save_outputs+"cpu_load_results_graph_"+process_name +"_moving_avg.png", show_plot=False,crop_start=start_times[i],crop_end=start_times[i]+durations[i])
+        custom_func(memory_load_file_path, "Memory load mean", "time (s)", "Load (%)", 0, 1, output_graph_path=dir_save_outputs+"memory_load_results_graph_"+process_name +"_moving_avg.png", show_plot=False,crop_start=start_times[i],crop_end=start_times[i]+durations[i])

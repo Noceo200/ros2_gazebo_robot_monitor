@@ -16,6 +16,8 @@ class MonitorComputer(Node):
         self.sav_cpu = True
         self.sav_mem = True
         self.sav_gpus = True
+        self.sav_custom_process = True
+        self.custom_process_name = "planner_server"
         self.print_vals = False
 
         # Get the directory parameter
@@ -67,6 +69,8 @@ class MonitorComputer(Node):
                     print(f"  Temperature: {gpu.temperature} °C")"""
             else:
                 print("No GPUs found.")
+        if self.sav_custom_process:
+            self.sav_process(self.custom_process_name)
 
         if self.print_vals: print("")
         
@@ -75,6 +79,15 @@ class MonitorComputer(Node):
         msg = msg_template(self.time,[psutil.cpu_percent()])
         if self.print_vals: print("cpu_load: "+msg[:-1]+"%")
         self.write_in_file(file,msg)
+
+    def sav_process(self,process_name):
+        for proc in psutil.process_iter(['pid', 'name', 'cpu_percent']):
+            if proc.info['name'] == process_name:
+                num_cores = psutil.cpu_count()
+                file = self.directory+"cpu_load_"+process_name+".txt"
+                msg = msg_template(self.time,[proc.info['cpu_percent']/num_cores])
+                if self.print_vals: print("cpu_load: "+msg[:-1]+"%")
+                self.write_in_file(file,msg)
 
     def save_mem(self):
         file = self.directory+"memory_load.txt"
